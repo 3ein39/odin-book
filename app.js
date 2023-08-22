@@ -14,6 +14,11 @@ function addBookToLibrary() {
     const year = prompt('year');
     const book = new Book(title, author, year);
     myLibrary.push(book);
+    // clear table body
+    const table = document.querySelector('#booksTable tbody');
+    table.innerHTML = '';
+    // display books
+    displayBooks();
 }
 
 // Display books in myLibrary array
@@ -41,3 +46,10 @@ function displayBooks() {
 }
 
 displayBooks();
+
+
+// the logic to add a book to the library
+const addBookBtn = document.querySelector('#addBookBtn');
+addBookBtn.addEventListener('click', () => {
+    addBookToLibrary();
+});
