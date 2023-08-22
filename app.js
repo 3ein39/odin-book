@@ -53,7 +53,7 @@ form.addEventListener('submit', (e) => {
     const author = document.querySelector('#author').value;
     const year = document.querySelector('#year').value;
     const numPages = document.querySelector('#pages').value;
-    const read = document.querySelector('#read').checked;
+    const read = document.querySelector('#isRead').checked;
     let book = new Book(title, author, year, numPages, read);
     myLibrary.push(book);
     book.addToTable();
