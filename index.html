@@ -23,6 +23,26 @@
 <center>
     <button id="addBookBtn">Add Book</button>
 </center>
+<dialog id="addBookDialog">
+    <form id="bookForm">
+        <label for="title">Title:</label>
+        <input type="text" id="title" required><br>
+
+        <label for="author">Author:</label>
+        <input type="text" id="author" required><br>
+
+        <label for="year">Year:</label>
+        <input type="text" id="year" required><br>
+
+        <label for="pages">Number of Pages:</label>
+        <input type="number" id="pages" required><br>
+
+        <label for="isRead">Is Read:</label>
+        <input type="checkbox" id="isRead"><br>
+
+        <button type="submit">Add</button>
+    </form>
+</dialog>
 </body>
 <script src="app.js"></script>
 </html>

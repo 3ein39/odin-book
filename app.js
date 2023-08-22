@@ -1,5 +1,6 @@
 const myLibrary = [];
-
+const dialog = document.querySelector('#addBookDialog');
+const form = document.querySelector('#bookForm');
 // some seeds
 function seed() {
     const book1 = new Book('The Hobbit', 'J.R.R. Tolkien', 1937, 310, true);
@@ -46,20 +47,22 @@ function Book(title, author, year, numPages, read) {
     }
 }
 
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+    const title = document.querySelector('#title').value;
+    const author = document.querySelector('#author').value;
+    const year = document.querySelector('#year').value;
+    const numPages = document.querySelector('#pages').value;
+    const read = document.querySelector('#read').checked;
+    let book = new Book(title, author, year, numPages, read);
+    myLibrary.push(book);
+    book.addToTable();
+    dialog.close();
+})
+
 // Get input from user and add to myLibrary array
 function addBookToLibrary() {
-    const title = prompt('title');
-    const author = prompt('author');
-    const year = prompt('year');
-    const numPages = prompt('numPages');
-    const read = prompt('read');
-    const book = new Book(title, author, year, numPages, read);
-    myLibrary.push(book);
-    // clear table body
-    const table = document.querySelector('#booksTable tbody');
-    table.innerHTML = '';
-    // display books
-    displayBooks();
+    dialog.showModal();
 }
 
 // Display books in myLibrary array
