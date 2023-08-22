@@ -23,6 +23,15 @@ function Book(title, author, year, numPages, read) {
     this.addToTable = function() {
         // create a table row for each book
         const row = document.createElement('tr');
+        row.addEventListener('dblclick', (el) => {
+            let title = el.target.innerText;
+            let book = myLibrary.find(book => book.title === title);
+            // get its index from child nodes
+            let index = Array.prototype.indexOf.call(table.childNodes, el.target.parentNode);
+            // remove it from the table
+            table.removeChild(el.target.parentNode);
+            myLibrary.splice(index, 1);
+        });
         // create a table data for each book property
         const title = document.createElement('td');
         const author = document.createElement('td');
@@ -63,6 +72,13 @@ form.addEventListener('submit', (e) => {
 // Get input from user and add to myLibrary array
 function addBookToLibrary() {
     dialog.showModal();
+}
+
+function deleteMe() {
+    let index = myLibrary.indexOf(this);
+    myLibrary.splice(index, 1);
+    table.removeChild(this);
+    this.remove();
 }
 
 // Display books in myLibrary array
