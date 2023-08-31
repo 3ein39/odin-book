@@ -1,6 +1,7 @@
-const myLibrary = [];
+// const myLibrary = [];
 const dialog = document.querySelector('#addBookDialog');
 const form = document.querySelector('#bookForm');
+const table = document.querySelector('#booksTable tbody');
 
 // Book class
 // tested
@@ -15,15 +16,7 @@ class Book {
     addToTable() {
          // create a table row for each book
         const row = document.createElement('tr');
-        row.addEventListener('dblclick', (el) => {
-            let title = el.target.innerText;
-            // let book = myLibrary.find(book => book.title === title);
-            // get its index from child nodes
-            let index = Array.prototype.indexOf.call(table.childNodes, el.target.parentNode);
-            // remove it from the table
-            table.removeChild(el.target.parentNode);
-            myLibrary.splice(index, 1);
-        });
+        row.addEventListener('dblclick', myLibrary.removeBook.bind(myLibrary, this));
         // create a table data for each book property
         const title = document.createElement('td');
         const author = document.createElement('td');
@@ -47,6 +40,30 @@ class Book {
         table.appendChild(row);
     }
 }
+
+// library class
+class Library {
+    constructor() {
+        this.books = [];
+    }
+    addBook(book) {
+        this.books.push(book);
+        book.addToTable();
+    }
+    removeBook(book) {
+        let index = this.books.indexOf(book);
+        this.books.splice(index, 1);
+        // remove from table
+        let row = table.childNodes[index + 1];
+        table.removeChild(row);
+    }
+    displayBooks() {
+        this.books.forEach(book => {
+            book.addToTable();
+        });
+    }
+}
+let myLibrary = new Library();
 // some seeds
 function seed() {
     const book1 = new Book('The Hobbit', 'J.R.R. Tolkien', 1937, 310, true);
@@ -54,10 +71,12 @@ function seed() {
     const book3 = new Book('The Two Towers', 'J.R.R. Tolkien', 1954, 352, true);
     const book4 = new Book('The Return of the King', 'J.R.R. Tolkien', 1955, 416, true);
     const book5 = new Book('The Silmarillion', 'J.R.R. Tolkien', 1977, 365, true);
-    myLibrary.push(book1, book2, book3, book4, book5);
-    myLibrary.forEach(book => book.addToTable());
+    myLibrary.addBook(book1);
+    myLibrary.addBook(book2);
+    myLibrary.addBook(book3);
+    myLibrary.addBook(book4);
+    myLibrary.addBook(book5);
 }
-const table = document.querySelector('#booksTable tbody');
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -67,8 +86,7 @@ form.addEventListener('submit', (e) => {
     const numPages = document.querySelector('#pages').value;
     const read = document.querySelector('#isRead').checked;
     let book = new Book(title, author, year, numPages, read);
-    myLibrary.push(book);
-    book.addToTable();
+    myLibrary.addBook(book);
     dialog.close();
 })
 
@@ -77,21 +95,6 @@ function addBookToLibrary() {
     dialog.showModal();
 }
 
-function deleteMe() {
-    let index = myLibrary.indexOf(this);
-    myLibrary.splice(index, 1);
-    table.removeChild(this);
-    this.remove();
-}
-
-// Display books in myLibrary array
-function displayBooks() {
-    // get table body
-    myLibrary.forEach(book => {
-        book.addToTable();
-    });
-}
-// the logic to add a book to the library
 const addBookBtn = document.querySelector('#addBookBtn');
 addBookBtn.addEventListener('click', () => {
     addBookToLibrary();
