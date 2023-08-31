@@ -6,18 +6,7 @@ class Library {
         this.books.push(book);
         book.addToTable();
     }
-    removeBook(book) {
-        let index = this.books.indexOf(book);
-        this.books.splice(index, 1);
-        // remove from table
-        let row = myLibrary.table.childNodes[index + 1];
-        myLibrary.table.removeChild(row);
-    }
-    displayBooks() {
-        this.books.forEach(book => {
-            book.addToTable();
-        });
-    }
+
 }
 class LibraryController {
     constructor() {
@@ -55,13 +44,6 @@ class LibraryController {
         let row = this.table.childNodes[index + 1];
         this.table.removeChild(row);
     }
-    displayBooks() {
-        this.myLibrary.books.forEach(book => {
-            book.addToTable();
-        });
-
-    }
-
     seed() {
         const book1 = new Book('The Hobbit', 'J.R.R. Tolkien', 1937, 310, true);
         const book2 = new Book('The Fellowship of the Ring', 'J.R.R. Tolkien', 1954, 423, true);
