@@ -3,6 +3,7 @@ const dialog = document.querySelector('#addBookDialog');
 const form = document.querySelector('#bookForm');
 
 // Book class
+// tested
 class Book {
     constructor(title, author, year, numPages, read) {
         this.title = title;
@@ -57,49 +58,6 @@ function seed() {
     myLibrary.forEach(book => book.addToTable());
 }
 const table = document.querySelector('#booksTable tbody');
-// The book obj constructor
-// function Book(title, author, year, numPages, read) {
-//     this.title = title;
-//     this.author = author;
-//     this.year = year;
-//     this.numPages = numPages;
-//     this.read = read;
-//
-//     this.addToTable = function() {
-//         // create a table row for each book
-//         const row = document.createElement('tr');
-//         row.addEventListener('dblclick', (el) => {
-//             let title = el.target.innerText;
-//             let book = myLibrary.find(book => book.title === title);
-//             // get its index from child nodes
-//             let index = Array.prototype.indexOf.call(table.childNodes, el.target.parentNode);
-//             // remove it from the table
-//             table.removeChild(el.target.parentNode);
-//             myLibrary.splice(index, 1);
-//         });
-//         // create a table data for each book property
-//         const title = document.createElement('td');
-//         const author = document.createElement('td');
-//         const year = document.createElement('td');
-//         const numPages = document.createElement('td');
-//         const read = document.createElement('td');
-//         // add book properties to table data
-//         title.textContent = this.title;
-//         author.textContent = this.author;
-//         year.textContent = this.year;
-//         numPages.textContent = this.numPages;
-//         // read is a checkbox
-//         read.innerHTML = `<input type="checkbox" name="read" id="read" ${this.read ? 'checked' : ''}>`;
-//         // add table data to table row
-//         row.appendChild(title);
-//         row.appendChild(author);
-//         row.appendChild(year);
-//         row.appendChild(numPages);
-//         row.appendChild(read);
-//         // add table row to table body
-//         table.appendChild(row);
-//     }
-// }
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
